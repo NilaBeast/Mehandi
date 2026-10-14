@@ -12,6 +12,14 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 1020) setOpen(false)
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   const links = [
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
@@ -55,7 +63,7 @@ export default function Navbar() {
             <a className="btn btn-gold btn-sm" href={WHATSAPP} target="_blank" rel="noreferrer">
               ✦ Book Now
             </a>
-            <button className={`hamburger ${open ? 'active' : ''}`} onClick={() => setOpen(!open)} aria-label="Menu">
+            <button className={`hamburger ${open ? 'active' : ''}`} onClick={() => setOpen(!open)} aria-label="Menu" aria-expanded={open}>
               <span /><span /><span />
             </button>
           </div>
